@@ -1,3 +1,7 @@
+package servlets;
+
+import servlets.DBConnection;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

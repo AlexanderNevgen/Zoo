@@ -1,3 +1,5 @@
+package servlets;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +21,10 @@ public class AddServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String firstName = req.getParameter("Firstname");
-        String ticketId = req.getParameter("TicketId");
 
-        DBConnection.addVisitor(firstName, Integer.parseInt(ticketId));
+        String ticketCount = req.getParameter("TicketCount");
+
+        DBConnection.addVisitor(firstName, Integer.parseInt(ticketCount));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
 

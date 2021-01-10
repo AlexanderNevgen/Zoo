@@ -14,7 +14,7 @@
 <form action="addVisitor" method="POST">
     Firstname: <input name="Firstname" />
     <br><br>
-    TicketId: <input name="TicketId" />
+    TicketCount: <input name="TicketCount" />
     <br><br>
 
     <input type="submit" value="Submit" />

@@ -4,12 +4,10 @@ public class Visitor {
 
     public String firstName;
     public int id;
-    public int ticketId;
 
-    public Visitor(String firstName, int id, int ticketId){
+    public Visitor(String firstName, int id){
         this.firstName= firstName;
         this.id = id;
-        this.ticketId =ticketId;
     }
 
     public String getFirstName() {
@@ -20,10 +18,6 @@ public class Visitor {
         return id;
     }
 
-    public int getTicketId() {
-        return ticketId;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -32,7 +26,4 @@ public class Visitor {
         this.id = id;
     }
 
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
-    }
 }

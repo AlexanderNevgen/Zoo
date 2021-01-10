@@ -16,8 +16,6 @@
     <br><br>
     firstname: <input name="firstname" />
     <br><br>
-    ticketId: <input name="ticketId" />
-    <br><br>
     <input type="submit" value="Submit" />
 </form>
 </body>

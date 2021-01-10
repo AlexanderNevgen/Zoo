@@ -1,3 +1,7 @@
+package servlets;
+
+import servlets.DBConnection;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,9 +24,8 @@ public class UpdateServlet extends HttpServlet {
 
         String id = req.getParameter("id");
         String firstname = req.getParameter("firstname");
-        String ticketId = req.getParameter("ticketId");
 
-        DBConnection.updateVisitor(Integer.parseInt(id), firstname, Integer.parseInt(ticketId));
+        DBConnection.updateVisitor(Integer.parseInt(id), firstname);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
 

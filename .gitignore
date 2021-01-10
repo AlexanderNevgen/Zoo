@@ -164,3 +164,7 @@ $RECYCLE.BIN/
 Zoo.iml
 target/maven-archiver/pom.properties
 .idea/vcs.xml
+target/Zoo/WEB-INF/web.xml
+target/Zoo/WEB-INF/web.xml
+target/Zoo/WEB-INF/web.xml
+target/Zoo/WEB-INF/web.xml
