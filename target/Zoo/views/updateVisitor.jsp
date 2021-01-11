@@ -16,6 +16,8 @@
     <br><br>
     firstname: <input name="firstname" />
     <br><br>
+    ticketCount: <input name="ticketCount" />
+    <br><br>
     <input type="submit" value="Submit" />
 </form>
 </body>

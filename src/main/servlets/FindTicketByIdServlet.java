@@ -1,6 +1,8 @@
 package servlets;
 
-import servlets.DBConnection;
+//import servlets.DBConnection;
+
+import services.FindTicketById;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,9 +27,7 @@ public class FindTicketByIdServlet extends HttpServlet{
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/findTicketById.jsp");
 
-        String id = req.getParameter("VisitorId");
-
-        req.setAttribute("list", DBConnection.findTicketById(Integer.parseInt(id)));
+        req.setAttribute("list", FindTicketById.findTicketById(Integer.parseInt(req.getParameter("VisitorId"))));
 
         requestDispatcher.forward(req, resp);
 

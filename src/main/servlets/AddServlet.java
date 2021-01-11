@@ -1,5 +1,8 @@
 package servlets;
 
+import mapper.VisitorMapper;
+import services.AddVisitor;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,11 +23,7 @@ public class AddServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String firstName = req.getParameter("Firstname");
-
-        String ticketCount = req.getParameter("TicketCount");
-
-        DBConnection.addVisitor(firstName, Integer.parseInt(ticketCount));
+        AddVisitor.addVisitor(VisitorMapper.mapperVisitor(req.getParameter("Firstname"),Integer.parseInt(req.getParameter("TicketCount"))));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
 

@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="deleteVisitor">
+<form action="deleteVisitor" method="post">
     Id: <input name="Id" />
     <br><br>
 

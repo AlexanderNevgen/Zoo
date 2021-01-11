@@ -1,6 +1,8 @@
 package servlets;
 
-import servlets.DBConnection;
+import mapper.VisitorMapper;
+
+import services.UpdateVisitor;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,10 +24,7 @@ public class UpdateServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
-        String firstname = req.getParameter("firstname");
-
-        DBConnection.updateVisitor(Integer.parseInt(id), firstname);
+        UpdateVisitor.updateVisitor(VisitorMapper.mapperVisitor(req.getParameter("Firstname"),Integer.parseInt(req.getParameter("TicketCount"))), Integer.parseInt("id"));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
 

@@ -1,6 +1,6 @@
 package servlets;
 
-import servlets.DBConnection;
+import services.DeleteVisitor;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,9 +22,7 @@ public class DeleteServlet extends HttpServlet  {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("Id");
-
-        DBConnection.deleteVisitor(Integer.parseInt(id));
+        DeleteVisitor.deleteVisitor(Integer.parseInt(req.getParameter("Id")));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
 

@@ -1,6 +1,6 @@
 package servlets;
 
-import servlets.DBConnection;
+import services.GetListOfVisitors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class GetServlet extends HttpServlet {
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/visitorList.jsp");
 
-        req.setAttribute("list", DBConnection.getALLVisitors());
+        req.setAttribute("list", GetListOfVisitors.getALLVisitors());
 
         requestDispatcher.forward(req, resp);
 
