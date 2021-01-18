@@ -1,6 +1,7 @@
 package servlets;
 
-import services.GetListOfVisitors;
+import lombok.SneakyThrows;
+import services.VisitorService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,11 +15,12 @@ import java.io.IOException;
 public class GetServlet extends HttpServlet {
 
 
+    @SneakyThrows
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/visitorList.jsp");
 
-        req.setAttribute("list", GetListOfVisitors.getALLVisitors());
+        req.setAttribute("list", VisitorService.findAllVisitors());
 
         requestDispatcher.forward(req, resp);
 

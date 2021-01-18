@@ -6,8 +6,6 @@ public class VisitorMapper {
 
     public static Visitor mapperVisitor(String firstName, int ticketCount){
 
-        Visitor visitor = new Visitor(ticketCount, firstName);
-
-        return visitor;
+        return new Visitor(ticketCount, firstName);
     }
 }

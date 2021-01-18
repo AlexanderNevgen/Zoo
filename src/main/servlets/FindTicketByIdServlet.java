@@ -1,8 +1,7 @@
 package servlets;
 
-//import servlets.DBConnection;
-
-import services.FindTicketById;
+import lombok.SneakyThrows;
+import services.VisitorService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,11 +22,12 @@ public class FindTicketByIdServlet extends HttpServlet{
 
     }
 
+    @SneakyThrows
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/findTicketById.jsp");
 
-        req.setAttribute("list", FindTicketById.findTicketById(Integer.parseInt(req.getParameter("VisitorId"))));
+        req.setAttribute("list", VisitorService.find(Integer.parseInt(req.getParameter("VisitorId"))));
 
         requestDispatcher.forward(req, resp);
 

@@ -1,6 +1,7 @@
 package servlets;
 
-import services.DeleteVisitor;
+import lombok.SneakyThrows;
+import services.VisitorService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,9 +21,10 @@ public class DeleteServlet extends HttpServlet  {
         requestDispatcher.forward(req, resp);
     }
 
+    @SneakyThrows
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        DeleteVisitor.deleteVisitor(Integer.parseInt(req.getParameter("Id")));
+        VisitorService.deleteVisitor(Integer.parseInt(req.getParameter("Id")));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
 

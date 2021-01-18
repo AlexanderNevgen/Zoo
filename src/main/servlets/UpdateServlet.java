@@ -1,8 +1,9 @@
 package servlets;
 
+import lombok.SneakyThrows;
 import mapper.VisitorMapper;
 
-import services.UpdateVisitor;
+import services.VisitorService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,9 +23,10 @@ public class UpdateServlet extends HttpServlet {
         requestDispatcher.forward(req, resp);
     }
 
+    @SneakyThrows
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        UpdateVisitor.updateVisitor(VisitorMapper.mapperVisitor(req.getParameter("Firstname"),Integer.parseInt(req.getParameter("TicketCount"))), Integer.parseInt("id"));
+        VisitorService.updateVisitor(VisitorMapper.mapperVisitor(req.getParameter("firstname"),Integer.parseInt(req.getParameter("ticketCount"))), Integer.parseInt(req.getParameter("id")));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
 
