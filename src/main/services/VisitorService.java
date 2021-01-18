@@ -2,6 +2,7 @@ package services;
 
 import model.Ticket;
 import model.Visitor;
+import repository.TicketDao;
 import repository.VisitorDao;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.List;
 public class VisitorService {
 
     private static VisitorDao visitorDao = new VisitorDao();
+    private static TicketDao ticketDao = new TicketDao();
 
     public VisitorService() {
     }
@@ -33,6 +35,6 @@ public class VisitorService {
     }
 
     public static List<Ticket> find(int id) throws SQLException, IOException, ClassNotFoundException {
-        return visitorDao.findTicketById(id);
+        return ticketDao.findTicketById(id);
     }
 }
