@@ -1,6 +1,6 @@
 package repository;
 
-import dbConnection.DBConnection;
+import dbConnection.*;
 import model.Ticket;
 import model.Visitor;
 
@@ -23,8 +23,8 @@ public class VisitorDao {
         preparedStatement.setString(1, visitor.getFirstName());
         preparedStatement.executeUpdate();
 
-        ResultSet resultSet = statement.executeQuery("SELECT idvisitor FROM visitors  \n" +
-                "ORDER BY idvisitor DESC  \n" +
+        ResultSet resultSet = statement.executeQuery("SELECT id FROM visitors  \n" +
+                "ORDER BY id DESC  \n" +
                 "LIMIT 1;");
 
         int idvisitor = 0;
@@ -48,7 +48,7 @@ public class VisitorDao {
         Connection conn = DBConnection.getConnection();
 
         Statement statement = conn.createStatement();
-        String query = "UPDATE visitors SET  name = ? WHERE idvisitor = ?;";
+        String query = "UPDATE visitors SET  name = ? WHERE id = ?;";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         preparedStatement.setString(1, visitor.getFirstName());
         preparedStatement.setInt(2, id);
@@ -75,7 +75,7 @@ public class VisitorDao {
             Connection conn = DBConnection.getConnection() ;
 
             Statement statement = conn.createStatement();
-            String query ="DELETE FROM visitors WHERE idvisitor = ?";
+            String query ="DELETE FROM visitors WHERE id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();

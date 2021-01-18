@@ -1,7 +1,7 @@
 package servlets;
 
 import lombok.SneakyThrows;
-import mapper.VisitorMapper;
+//import mapper.VisitorMapper;
 
 import services.VisitorService;
 
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/updateVisitor")
+/*@WebServlet("/updateVisitor")
 public class UpdateServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,3 +34,4 @@ public class UpdateServlet extends HttpServlet {
 
     }
 }
+*/

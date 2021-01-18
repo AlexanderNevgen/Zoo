@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/getAllVisitors")
+/*@WebServlet("/getAllVisitors")
 public class GetServlet extends HttpServlet {
 
 
@@ -25,4 +25,4 @@ public class GetServlet extends HttpServlet {
         requestDispatcher.forward(req, resp);
 
     }
-}
+}*/

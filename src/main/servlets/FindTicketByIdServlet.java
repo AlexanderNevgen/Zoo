@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/findTicketById")
+/*@WebServlet("/findTicketById")
 public class FindTicketByIdServlet extends HttpServlet{
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,4 +32,4 @@ public class FindTicketByIdServlet extends HttpServlet{
         requestDispatcher.forward(req, resp);
 
     }
-}
+}*/

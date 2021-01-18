@@ -23,5 +23,5 @@
     </c:forEach>
 
 </table>
-<p style="text-align: center"><button onclick="window.location.href = '..';">Go to menu</button>
+<p style="text-align: center"><button onclick="window.location.href = 'http://localhost:8080/Zoo_war/';">Go to menu</button>
 </body>
