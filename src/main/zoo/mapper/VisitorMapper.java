@@ -1,6 +1,6 @@
-package mapper;
+package main.zoo.mapper;
 
-import model.Visitor;
+import main.zoo.model.Visitor;
 
 public class VisitorMapper {
 

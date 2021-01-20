@@ -1,4 +1,4 @@
-package dbConnection;
+package main.zoo.dbConnection;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,14 +1,16 @@
-package repository;
+package main.zoo.repository;
 
-import dbConnection.*;
-import model.Ticket;
-import model.Visitor;
+import main.zoo.dbConnection.DBConnection;
+import main.zoo.model.Ticket;
+import main.zoo.model.Visitor;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 
+//@Component
 public class TicketDao {
+
 
     public static void saveTicket(Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
 
@@ -36,6 +38,7 @@ public class TicketDao {
         }
     }
 
+
     public static void updateTicket(Visitor visitor, int id) throws SQLException, IOException, ClassNotFoundException {
         Connection conn = DBConnection.getConnection();
 
@@ -55,6 +58,8 @@ public class TicketDao {
         }
 
     }
+
+
     public static void deleteTicket(int id) throws SQLException, IOException, ClassNotFoundException {
         Connection conn = DBConnection.getConnection();
 
@@ -65,7 +70,8 @@ public class TicketDao {
 
     }
 
-    public List<Ticket> findTicketById(int idVisitor) throws SQLException, IOException, ClassNotFoundException {
+
+    public List<Ticket> findTicketByVisitorId(int idVisitor) throws SQLException, IOException, ClassNotFoundException {
         Visitor.ticketList.clear();
         Connection conn = DBConnection.getConnection();
 

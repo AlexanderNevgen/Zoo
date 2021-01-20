@@ -1,4 +1,5 @@
-package model;
+package main.zoo.model;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

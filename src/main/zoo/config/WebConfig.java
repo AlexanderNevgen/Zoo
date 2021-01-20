@@ -1,4 +1,4 @@
-package config;
+package main.zoo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,13 +9,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "controller")
+@ComponentScan(basePackages = "main.zoo")
 public class WebConfig {
 
     @Bean
     ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/views/");
+        viewResolver.setPrefix("main/zoo/webapp/views/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }

@@ -1,7 +1,7 @@
 <%@ page session="false" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.LinkedList" %>
-<%@ page import="model.Visitor" %>
+<%@ page import="main.model.Visitor" %>
 
 <html>
 <head>

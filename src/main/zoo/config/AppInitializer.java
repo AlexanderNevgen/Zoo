@@ -1,4 +1,4 @@
-package config;
+package main.zoo.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

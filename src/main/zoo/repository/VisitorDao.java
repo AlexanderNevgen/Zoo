@@ -1,12 +1,14 @@
-package repository;
+package main.zoo.repository;
 
-import dbConnection.*;
-import model.Visitor;
+import main.zoo.dbConnection.DBConnection;
+import org.springframework.stereotype.Component;
+import main.zoo.model.Visitor;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.LinkedList;
 
+@Component
 public class VisitorDao {
 
     static LinkedList<Visitor> visitorList = new LinkedList<Visitor>();
@@ -47,7 +49,6 @@ public class VisitorDao {
             TicketDao.deleteTicket(id);
 
     }
-
 
     public LinkedList<Visitor> findAll() throws SQLException, IOException, ClassNotFoundException {
 
