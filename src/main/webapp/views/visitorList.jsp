@@ -15,6 +15,7 @@
         <th>Last Name</th>
         <th>Age</th>
         <th>ID</th>
+        <th>Date</th>
     </tr>
 
     <c:forEach var="visitorList" items="${list}">
@@ -23,6 +24,7 @@
             <td>${visitorList.getLastName()}</td>
             <td>${visitorList.getAge()}</td>
             <td>${visitorList.getId()}</td>
+            <td>${visitorList.getDateOfVisit()}</td>
         </tr>
     </c:forEach>
 

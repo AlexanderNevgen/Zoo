@@ -26,18 +26,19 @@ public class VisitorDao {
     public void save(Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
         Connection conn = DBConnection.getConnection();
 
-        String query = "INSERT visitors(firstName, lastName, age) VALUES (?, ?, ?)";
+        String query = "INSERT visitors(firstName, lastName, age, ticketCount) VALUES (?, ?, ?, ?)";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         preparedStatement.setString(1, visitor.getFirstName());
         preparedStatement.setString(2, visitor.getLastName());
         preparedStatement.setInt(3, visitor.getAge());
+        preparedStatement.setInt(4, visitor.getTicketCount());
         preparedStatement.executeUpdate();
 
         TicketDao.saveTicket(visitor);
 
     }
 
-    public void update(Visitor visitor, int id) throws SQLException, IOException, ClassNotFoundException {
+    public void update(Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
         Connection conn = DBConnection.getConnection();
 
         String query = "UPDATE visitors SET  firstName = ?, lastName = ?, age = ? WHERE id = ?;";
@@ -45,10 +46,10 @@ public class VisitorDao {
         preparedStatement.setString(1, visitor.getFirstName());
         preparedStatement.setString(2, visitor.getLastName());
         preparedStatement.setInt(3, visitor.getAge());
-        preparedStatement.setInt(4, id);
+        preparedStatement.setInt(4, visitor.getId());
         preparedStatement.executeUpdate();
 
-        TicketDao.updateTicket(visitor, id);
+        TicketDao.updateTicket(visitor);
     }
 
     public void delete(int id) throws SQLException, IOException, ClassNotFoundException {
@@ -78,7 +79,8 @@ public class VisitorDao {
             String firstName = resultSet.getString(2);
             String lastName = resultSet.getString(3);
             int age = resultSet.getInt(4);
-            visitorList.add(new Visitor(firstName,lastName, age, id));
+            int ticketCount  =resultSet.getInt(5);
+            visitorList.add(new Visitor(id, firstName, lastName, age, ticketCount));
         }
 
         return visitorList;
@@ -96,7 +98,8 @@ public class VisitorDao {
         while (resultSet.next()) {
             int id = resultSet.getInt(1);
             int age = resultSet.getInt(4);
-            visitorList.add(new Visitor(firstName, lastName, age, id));
+            int ticketCount = resultSet.getInt(5);
+            visitorList.add(new Visitor(id, firstName, lastName, age, ticketCount));
         }
 
         return visitorList;

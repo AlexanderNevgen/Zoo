@@ -1,103 +1,56 @@
 package main.controller;
 
+import main.dto.VisitorWithTicketsDTO;
 import main.model.Visitor;
-import main.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 import main.services.VisitorService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class VisitorController {
 
+    private final VisitorService visitorService;
+
     @Autowired
-    VisitorService visitorService;
+    public VisitorController(VisitorService visitorService){
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
-        return "/index";
+        this.visitorService = visitorService;
     }
 
-    @RequestMapping(value = "/visitor", method = RequestMethod.GET)
-    public ModelAndView visitor() {
-        return new ModelAndView("addVisitor", "command", new Visitor());
+    @PostMapping(value = "/addVisitor")
+    public int addVisitor(@RequestBody Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
+
+        return visitorService.saveVisitor(visitor);
     }
 
-    @RequestMapping(value = "/addVisitor", method = RequestMethod.POST)
-    public String addVisitor(HttpServletRequest req) throws SQLException, IOException, ClassNotFoundException {
+    @DeleteMapping(value = "/deleteVisitor{id}")
+    public int deleteVisitor(@PathVariable (name = "id" ) final Integer id) throws SQLException, IOException, ClassNotFoundException {
 
-        visitorService.saveVisitor(VisitorMapper.mapperVisitor(req.getParameter("firstName"),Integer.parseInt(req.getParameter("ticketCount")), req.getParameter("lastName"),Integer.parseInt(req.getParameter("age"))));
-
-        return "index";
+        return visitorService.deleteVisitor(id);
     }
 
-    @RequestMapping(value = "/deleteVisitor", method = RequestMethod.GET)
-    public String inputVisitorIdToDelete(){
+    @GetMapping(value = "/getAllVisitors")
+    @ResponseBody
+    public  List<VisitorWithTicketsDTO> getAllVisitors() throws SQLException, IOException, ClassNotFoundException {
 
-        return "deleteVisitor";
+        return visitorService.getAllVisitors();
     }
 
-    @RequestMapping(value = "/deleteVisitor", method = RequestMethod.POST)
-    public String deleteVisitor(HttpServletRequest req) throws SQLException, IOException, ClassNotFoundException {
+    @PostMapping(value = "/findVisitorByName")
+    @ResponseBody
+    public  List<VisitorWithTicketsDTO> findVisitorByName(@RequestBody Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
 
-        visitorService.deleteVisitor(Integer.parseInt(req.getParameter("Id")));
-
-        return "index";
+        return visitorService.findVisitorByName(visitor.getFirstName(), visitor.getLastName());
     }
 
-    @RequestMapping(value = "/getAllVisitors", method = RequestMethod.GET)
-    public String getAllVisitors(HttpServletRequest req) throws SQLException, IOException, ClassNotFoundException {
+    @PutMapping(value = "/updateVisitor")
+    public int updateVisitor(@RequestBody Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
 
-        req.setAttribute("list", visitorService.findAllVisitors());
-
-        return "visitorList";
-    }
-
-    @RequestMapping(value = "/findTicketById", method = RequestMethod.GET)
-    public String inputVisitorIdToFindTicket(){
-
-        return "inputVisitorIdToFindTicket";
-    }
-
-    @RequestMapping(value = "/findTicketById", method = RequestMethod.POST)
-    public String findTicketById(HttpServletRequest req) throws SQLException, IOException, ClassNotFoundException {
-
-        req.setAttribute("list", visitorService.find(Integer.parseInt(req.getParameter("VisitorId"))));
-
-        return "findTicketById";
-    }
-
-    @RequestMapping(value = "/findVisitorByName", method = RequestMethod.GET)
-    public String inputVisitorNameToFind(){
-
-        return "inputVisitorNameToFind";
-    }
-
-    @RequestMapping(value = "/findVisitorByName", method = RequestMethod.POST)
-    public String findVisitorByName(HttpServletRequest req) throws SQLException, IOException, ClassNotFoundException {
-
-        req.setAttribute("list", visitorService.findVisitor(req.getParameter("firstName"), req.getParameter("lastName")));
-
-        return "findVisitorByName";
-    }
-
-    @RequestMapping(value = "/updateVisitor", method = RequestMethod.GET)
-    public String inputDataToUpdateVisitor(){
-
-        return "updateVisitor";
-    }
-
-    @RequestMapping(value = "/updateVisitor", method = RequestMethod.POST)
-    public String updateVisitor(HttpServletRequest req) throws SQLException, IOException, ClassNotFoundException {
-
-        visitorService.updateVisitor(VisitorMapper.mapperVisitor(req.getParameter("firstName"),Integer.parseInt(req.getParameter("ticketCount")), req.getParameter("lastName"),Integer.parseInt(req.getParameter("age"))), Integer.parseInt(req.getParameter("id")));
-
-        return "index";
+        return visitorService.updateVisitor(visitor);
     }
 }

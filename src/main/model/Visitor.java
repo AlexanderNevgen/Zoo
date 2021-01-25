@@ -1,44 +1,40 @@
 package main.model;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
-//@Entity
+@Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-//@Table (name = "visitors")
+@Table(name = "visitors")
 public class Visitor {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-   // @Column(name = "name")
+    @Column(name = "firstName")
     private String firstName;
 
+    @Column(name = "lastName")
     private String lastName;
 
+    @Column (name = "ticketCount")
     private int ticketCount;
 
+    @Column (name = "age")
     private int age;
 
-    //@OneToMany(mappedBy = "visitor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "visitors", cascade = CascadeType.ALL, orphanRemoval = true)
     public static List<Ticket> ticketList = new LinkedList<>();
 
-    public Visitor (String firstName,String lastName, int age, int id){
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
-
-    public Visitor(int ticketCount, String firstName, String lastName, int age){
-        this.firstName = firstName;
-        this.ticketCount = ticketCount;
-        this.lastName = lastName;
-        this.age = age;
-
+    public List<Ticket> getTicketList(){
+        return ticketList;
     }
 }

@@ -1,6 +1,7 @@
 package main.repository;
 
 import main.dbConnection.*;
+import main.dto.TicketDTO;
 import main.model.Ticket;
 import main.model.Visitor;
 
@@ -19,6 +20,8 @@ public class TicketDao {
 
         return new TicketDao();
     }
+
+
 
     public static void saveTicket(Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
 
@@ -46,12 +49,12 @@ public class TicketDao {
         }
     }
 
-    public static void updateTicket(Visitor visitor, int id) throws SQLException, IOException, ClassNotFoundException {
+    public static void updateTicket(Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
         Connection conn = DBConnection.getConnection();
 
         String query = "DELETE FROM ticket WHERE idvisitor = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setInt(1, id);
+        preparedStatement.setInt(1, visitor.getId());
         preparedStatement.executeUpdate();
 
         Date sqlDate = new java.sql.Date(System.currentTimeMillis());
@@ -59,7 +62,7 @@ public class TicketDao {
             String query2 = "INSERT ticket(date, idvisitor) VALUES (?, ?)";
             PreparedStatement preparedStatement2 = conn.prepareStatement(query2);
             preparedStatement2.setDate(1, sqlDate);
-            preparedStatement2.setInt(2, id);
+            preparedStatement2.setInt(2, visitor.getId());
             preparedStatement2.executeUpdate();
 
         }
@@ -88,6 +91,26 @@ public class TicketDao {
             java.util.Date date = resultSet.getDate(2);
             Visitor.ticketList.add(new Ticket(idTicket, date, idVisitor));
         }
+        return Visitor.ticketList;
+    }
+
+    public List<Ticket> getAllTickets() throws SQLException, IOException, ClassNotFoundException {
+
+        Visitor.ticketList.clear();
+        Connection conn = DBConnection.getConnection();
+
+        Statement statement = conn.createStatement();
+
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM ticket ");
+        while (resultSet.next()) {
+
+            int id = resultSet.getInt(1);
+            Date date = resultSet.getDate(2);
+            int visitorId = resultSet.getInt(3);
+
+            Visitor.ticketList.add(new Ticket(id,date, visitorId));
+        }
+
         return Visitor.ticketList;
     }
 }

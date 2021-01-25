@@ -4,32 +4,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Date;
 
-//@Entity
-@AllArgsConstructor
+@Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-//@Table (name = "ticket")
+@Table (name = "ticket")
 public class Ticket {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private int ticketId;
 
-    //@Column (name = "date")
+    @Column (name = "date")
     private Date date;
 
-   // @Column (name = "id")
+    @Column (name = "idvisitor")
     private int visitorId;
 
-   // @ManyToOne(fetch = FetchType.LAZY)
-   // @JoinColumn(name = "idvisitor")
-    private Visitor visitor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idvisitor")
+    private static Visitor visitor;
 
-    public Ticket(int ticketId, Date date, int visitorId){
-        this.ticketId = ticketId;
-        this.date = date;
-        this.visitorId = visitorId;
-    }
 }
