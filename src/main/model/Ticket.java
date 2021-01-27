@@ -29,4 +29,7 @@ public class Ticket {
     @JoinColumn(name = "idvisitor")
     private static Visitor visitor;
 
+    public static Visitor getVisitor() {
+        return visitor;
+    }
 }

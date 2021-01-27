@@ -7,7 +7,6 @@ import main.repository.VisitorDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,27 +22,27 @@ public class VisitorService {
         this.visitorDao = visitorDao;
     }
 
-    public int saveVisitor(Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
+    public int saveVisitor(Visitor visitor) {
         visitorDao.save(visitor);
         return visitor.getId();
     }
 
-    public int deleteVisitor(int id) throws SQLException, IOException, ClassNotFoundException {
-        visitorDao.delete(id);
+    public int deleteVisitor(int id) {
+        visitorDao.deleteById(id);
         return id;
     }
 
-    public int updateVisitor(Visitor visitor) throws SQLException, IOException, ClassNotFoundException {
-        visitorDao.update(visitor);
+    public int updateVisitor(Visitor visitor) throws SQLException {
+        VisitorDao.update(visitor);
         return visitor.getId();
     }
 
-    public List<VisitorWithTicketsDTO> findVisitorByName(String firstName, String lastName) throws SQLException, IOException, ClassNotFoundException {
-        return visitorDao.findVisitorByName(firstName, lastName).stream().map(this::convertToVisitorWithTicketsDTO)
+    public List<VisitorWithTicketsDTO> findVisitorByName(String firstName, String lastName)  {
+        return visitorDao.findVisitorByFirstNameAndLastName(firstName, lastName).stream().map(this::convertToVisitorWithTicketsDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<VisitorWithTicketsDTO> getAllVisitors() throws SQLException, IOException, ClassNotFoundException {
+    public List<VisitorWithTicketsDTO> getAllVisitors() {
         return visitorDao.findAll().stream().map(this::convertToVisitorWithTicketsDTO)
                 .collect(Collectors.toList());
     }
