@@ -7,7 +7,6 @@ import main.repository.VisitorDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,8 +31,8 @@ public class VisitorService {
         return id;
     }
 
-    public int updateVisitor(Visitor visitor) throws SQLException {
-        VisitorDao.update(visitor);
+    public int updateVisitor (Visitor visitor){
+        visitorDao.updateVisitor(visitor.getId(), visitor.getFirstName(), visitor.getLastName(), visitor.getAge(), visitor.getTicketCount());
         return visitor.getId();
     }
 

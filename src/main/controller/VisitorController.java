@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import main.services.VisitorService;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -43,13 +42,13 @@ public class VisitorController {
 
     @PostMapping(value = "/findVisitorByName")
     @ResponseBody
-    public  List<VisitorWithTicketsDTO> findVisitorByName(@RequestBody Visitor visitor) throws SQLException {
+    public  List<VisitorWithTicketsDTO> findVisitorByName(@RequestBody Visitor visitor) {
 
         return visitorService.findVisitorByName(visitor.getFirstName(), visitor.getLastName());
     }
 
     @PutMapping(value = "/updateVisitor")
-    public int updateVisitor(@RequestBody Visitor visitor) throws SQLException {
+    public int updateVisitor(@RequestBody Visitor visitor) {
 
         return visitorService.updateVisitor(visitor);
     }
