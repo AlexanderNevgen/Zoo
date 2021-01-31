@@ -14,9 +14,9 @@ public interface VisitorDao extends JpaRepository<Visitor, Integer> {
 
     @Modifying
     @Query(
-            value = "UPDATE visitors v SET v.firstName = :firstName, v.lastName = :lastName, v.age =:age, v.ticketCount = :ticketCount WHERE v.id = :id",
+            value = "UPDATE visitors v SET v.firstName = :firstName, v.lastName = :lastName, v.age =:age WHERE v.id = :id",
             nativeQuery = true)
-    void updateVisitor(@Param("id") int id, @Param("firstName") String firstName, @Param("lastName") String lastName, @Param("age") int age, @Param("ticketCount") int ticketCount);
+    void updateVisitor(@Param("id") int id, @Param("firstName") String firstName, @Param("lastName") String lastName, @Param("age") int age);
 
     List<Visitor> findVisitorByFirstNameAndLastName(String firstName, String lastName);
 }

@@ -21,5 +21,4 @@ public interface TicketDao extends JpaRepository<Ticket, Integer> {
     void updateTicket(@Param("visitorId") int visitorId);
 
     List<Ticket> findTicketByVisitorId(int id);
-
 }

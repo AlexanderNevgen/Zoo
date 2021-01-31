@@ -32,11 +32,11 @@ public class VisitorService {
     }
 
     public int updateVisitor (Visitor visitor){
-        visitorDao.updateVisitor(visitor.getId(), visitor.getFirstName(), visitor.getLastName(), visitor.getAge(), visitor.getTicketCount());
+        visitorDao.updateVisitor(visitor.getId(), visitor.getFirstName(), visitor.getLastName(), visitor.getAge());
         return visitor.getId();
     }
 
-    public List<VisitorWithTicketsDTO> findVisitorByName(String firstName, String lastName)  {
+    public List<VisitorWithTicketsDTO> findVisitorByName(String firstName, String lastName) {
         return visitorDao.findVisitorByFirstNameAndLastName(firstName, lastName).stream().map(this::convertToVisitorWithTicketsDTO)
                 .collect(Collectors.toList());
     }

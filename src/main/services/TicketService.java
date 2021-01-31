@@ -23,6 +23,7 @@ public class TicketService {
     }
 
     public List<TicketDTO> getTicketsByVisitorId(int id)  {
+
         return ticketDao.findTicketByVisitorId(id).stream().map(this::convertToTicketDTO)
                 .collect(Collectors.toList());
     }

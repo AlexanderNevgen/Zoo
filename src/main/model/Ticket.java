@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -28,6 +29,13 @@ public class Ticket {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idvisitor")
     private static Visitor visitor;
+
+    @ManyToMany
+    @JoinTable(
+            name = "departmentInTicket",
+            joinColumns = @JoinColumn(name = "ticket_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"))
+    List<Department> departmentList;
 
     public static Visitor getVisitor() {
         return visitor;
