@@ -8,11 +8,10 @@ import java.util.List;
 @Data
 public class VisitorWithTicketsDTO {
 
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     private int age;
     private int ticketCount;
     private List<Ticket> tickets;
-
 }

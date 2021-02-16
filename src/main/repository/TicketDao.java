@@ -1,24 +1,45 @@
 package main.repository;
 
+import main.dto.TicketDTO;
 import main.model.Ticket;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface TicketDao extends JpaRepository<Ticket, Integer> {
+public class TicketDao {
 
-    @Modifying
-    @Query(
-            value = "UPDATE ticket t set t.date = :date where id =: visitorId",
-            nativeQuery = true
-    )
-    void updateTicket(@Param("visitorId") int visitorId);
+   EntityManagerFactory emf = Persistence.createEntityManagerFactory("tickets");
 
-    List<Ticket> findTicketByVisitorId(int id);
+    EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+
+    EntityManager em = getEntityManager();
+
+    Long saveTicket(Long visitorId){
+        Date date = new Date();
+        Ticket ticket = new Ticket();
+        ticket.setDate(date);
+        ticket.setVisitorId(visitorId);
+        em.getTransaction().begin();
+        em.persist(ticket);
+        em.getTransaction().commit();
+        return ticket.getTicketId();
+    }
+
+    public List<TicketDTO> findTicketByVisitorId(Long visitorId){
+
+        return em.createQuery("SELECT ticket from Ticket ticket where ticket.visitorId = ?1")
+                .setParameter(1, visitorId)
+                .getResultList();
+    }
+
+    public List<TicketDTO> getAllTickets (){
+
+        return em.createQuery("Select ticket from Ticket ticket").getResultList();
+    }
 }

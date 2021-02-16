@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class VisitorService {
@@ -21,29 +20,29 @@ public class VisitorService {
         this.visitorDao = visitorDao;
     }
 
-    public int saveVisitor(Visitor visitor) {
-        visitorDao.save(visitor);
+    public Long saveVisitor(Visitor visitor) {
+        return visitorDao.saveVisitor(visitor);
+    }
+
+    public Visitor getVisitorById(Long id){
+        return visitorDao.getVisitorById(id);
+    }
+
+    public Long deleteVisitorById(Long id) {
+        return visitorDao.deleteVisitorById(id);
+    }
+
+    public Long updateVisitor (Visitor visitor){
+        visitorDao.updateVisitor(visitor);
         return visitor.getId();
     }
 
-    public int deleteVisitor(int id) {
-        visitorDao.deleteById(id);
-        return id;
+    public List<Visitor> findVisitorByName(String firstName, String lastName) {
+        return visitorDao.findVisitorByName(firstName, lastName);
     }
 
-    public int updateVisitor (Visitor visitor){
-        visitorDao.updateVisitor(visitor.getId(), visitor.getFirstName(), visitor.getLastName(), visitor.getAge());
-        return visitor.getId();
-    }
-
-    public List<VisitorWithTicketsDTO> findVisitorByName(String firstName, String lastName) {
-        return visitorDao.findVisitorByFirstNameAndLastName(firstName, lastName).stream().map(this::convertToVisitorWithTicketsDTO)
-                .collect(Collectors.toList());
-    }
-
-    public List<VisitorWithTicketsDTO> getAllVisitors() {
-        return visitorDao.findAll().stream().map(this::convertToVisitorWithTicketsDTO)
-                .collect(Collectors.toList());
+    public List<Visitor> getAllVisitors() {
+        return visitorDao.getAllVisitors();
     }
 
     private VisitorWithTicketsDTO convertToVisitorWithTicketsDTO(Visitor visitor) {

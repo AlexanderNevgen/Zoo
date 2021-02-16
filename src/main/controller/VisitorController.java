@@ -1,6 +1,5 @@
 package main.controller;
 
-import main.dto.VisitorWithTicketsDTO;
 import main.model.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,33 +21,40 @@ public class VisitorController {
 
     @PostMapping(value = "/addVisitor")
 
-    public int addVisitor(@RequestBody Visitor visitor) {
+    public Long addVisitor(@RequestBody Visitor visitor) {
 
         return visitorService.saveVisitor(visitor);
     }
 
     @DeleteMapping(value = "/deleteVisitor{id}")
-    public int deleteVisitor(@PathVariable (name = "id" ) final Integer id) {
+    public Long deleteVisitor(@PathVariable (name = "id" ) final Long id) {
 
-        return visitorService.deleteVisitor(id);
+        return visitorService.deleteVisitorById(id);
     }
 
     @GetMapping(value = "/getAllVisitors")
     @ResponseBody
-    public  List<VisitorWithTicketsDTO> getAllVisitors() {
+    public  List<Visitor> getAllVisitors() {
 
         return visitorService.getAllVisitors();
     }
 
     @PostMapping(value = "/findVisitorByName")
     @ResponseBody
-    public  List<VisitorWithTicketsDTO> findVisitorByName(@RequestBody Visitor visitor) {
+    public List<Visitor> findVisitorByName(@RequestBody Visitor visitor) {
 
         return visitorService.findVisitorByName(visitor.getFirstName(), visitor.getLastName());
     }
 
+    @GetMapping(value = "/getVisitorById{id}")
+    @ResponseBody
+    public Visitor findVisitorById(@PathVariable Long id) {
+
+        return visitorService.getVisitorById(id);
+    }
+
     @PutMapping(value = "/updateVisitor")
-    public int updateVisitor(@RequestBody Visitor visitor) {
+    public Long updateVisitor(@RequestBody Visitor visitor) {
 
         return visitorService.updateVisitor(visitor);
     }

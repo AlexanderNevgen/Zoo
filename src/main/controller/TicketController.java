@@ -20,7 +20,7 @@ public class TicketController {
 
     @PostMapping(value = "/findTicketById/{id}")
     @ResponseBody
-    public List<TicketDTO> findTicketById(@PathVariable (name = "id") final Integer id) {
+    public List<TicketDTO> findTicketById(@PathVariable (name = "id") final Long id) {
 
         return ticketService.getTicketsByVisitorId(id);
     }

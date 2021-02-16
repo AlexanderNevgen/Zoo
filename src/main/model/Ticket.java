@@ -18,17 +18,17 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
-    private int ticketId;
+    private Long ticketId;
 
     @Column (name = "date")
     private Date date;
 
     @Column (name = "idvisitor")
-    private int visitorId;
+    private Long visitorId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idvisitor")
-    private static Visitor visitor;
+    private Visitor visitor;
 
     @ManyToMany
     @JoinTable(
@@ -36,8 +36,4 @@ public class Ticket {
             joinColumns = @JoinColumn(name = "ticket_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"))
     List<Department> departmentList;
-
-    public static Visitor getVisitor() {
-        return visitor;
-    }
 }

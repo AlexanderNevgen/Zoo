@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TicketService {
@@ -22,21 +21,19 @@ public class TicketService {
         this.ticketDao = ticketDao;
     }
 
-    public List<TicketDTO> getTicketsByVisitorId(int id)  {
+    public List<TicketDTO> getTicketsByVisitorId(Long id)  {
 
-        return ticketDao.findTicketByVisitorId(id).stream().map(this::convertToTicketDTO)
-                .collect(Collectors.toList());
+        return ticketDao.findTicketByVisitorId(id);
     }
 
     public List<TicketDTO> getAllTickets() {
-        return ticketDao.findAll().stream().map(this::convertToTicketDTO)
-                .collect(Collectors.toList());
+        return ticketDao.getAllTickets();
     }
 
-    private TicketDTO convertToTicketDTO(Ticket ticket) {
+    public TicketDTO convertToTicketDTO(Ticket ticket) {
         TicketDTO ticketDTO = new TicketDTO();
         ticketDTO.setDateOfVisit(ticket.getDate());
-        Visitor visitor = Ticket.getVisitor();
+        Visitor visitor = ticket.getVisitor();
         ticketDTO.setFirstName(visitor.getFirstName());
         ticketDTO.setLastName(visitor.getLastName());
         return ticketDTO;
