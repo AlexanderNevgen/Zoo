@@ -18,6 +18,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Zoo-master" value="0b138de0-781f-419f-a552-9ee9c7d2822f" />
+          <factory-entry name="entityManagerFactory" value="0b138de0-781f-419f-a552-9ee9c7d2822f" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

@@ -1,5 +1,6 @@
 package main.controller;
 
+import main.dto.SaveVisitorDTO;
 import main.model.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,9 @@ public class VisitorController {
 
     @PostMapping(value = "/addVisitor")
 
-    public Long addVisitor(@RequestBody Visitor visitor) {
+    public Long addVisitor(@RequestBody SaveVisitorDTO saveVisitorDTO) {
 
-        return visitorService.saveVisitor(visitor);
+        return visitorService.saveVisitor(saveVisitorDTO);
     }
 
     @DeleteMapping(value = "/deleteVisitor{id}")

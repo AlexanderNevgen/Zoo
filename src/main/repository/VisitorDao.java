@@ -1,5 +1,6 @@
 package main.repository;
 
+import main.dto.SaveVisitorDTO;
 import main.model.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,15 +25,15 @@ public class VisitorDao {
 
     EntityManager em = getEntityManager();
 
-    public Long saveVisitor(Visitor visitor){
+    public Long saveVisitor(SaveVisitorDTO saveVisitorDto){
 
         em.getTransaction().begin();
-        em.persist(visitor);
-        em.getTransaction().commit();
-        for(int i=0; i<visitor.getTicketCount(); i++){
-            ticketDao.saveTicket(visitor.getId());
+        em.persist(saveVisitorDto.getVisitor());
+        for(int i=0; i<saveVisitorDto.getVisitor().getTicketCount(); i++){
+            ticketDao.saveTicket(saveVisitorDto.getVisitor().getId(), saveVisitorDto.getDepartment());
         }
-        return visitor.getId();
+        em.getTransaction().commit();
+        return saveVisitorDto.getVisitor().getId();
     }
 
     public Visitor getVisitorById(Long visitorId) {

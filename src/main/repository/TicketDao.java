@@ -1,6 +1,7 @@
 package main.repository;
 
 import main.dto.TicketDTO;
+import main.model.Department;
 import main.model.Ticket;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
@@ -20,11 +21,12 @@ public class TicketDao {
 
     EntityManager em = getEntityManager();
 
-    Long saveTicket(Long visitorId){
+    Long saveTicket(Long visitorId, Department department){
         Date date = new Date();
         Ticket ticket = new Ticket();
         ticket.setDate(date);
         ticket.setVisitorId(visitorId);
+        ticket.addDepartment(department);
         em.getTransaction().begin();
         em.persist(ticket);
         em.getTransaction().commit();

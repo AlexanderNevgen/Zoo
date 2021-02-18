@@ -35,5 +35,9 @@ public class Ticket {
             name = "departmentInTicket",
             joinColumns = @JoinColumn(name = "ticket_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"))
-    List<Department> departmentList;
+    public List<Department> departmentList;
+
+    public void addDepartment(Department department){
+        departmentList.add(department);
+    }
 }
