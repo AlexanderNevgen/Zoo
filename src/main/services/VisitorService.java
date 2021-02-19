@@ -1,6 +1,5 @@
 package main.services;
 
-import main.dto.SaveVisitorDTO;
 import main.dto.VisitorWithTicketsDTO;
 import main.model.Ticket;
 import main.model.Visitor;
@@ -21,8 +20,8 @@ public class VisitorService {
         this.visitorDao = visitorDao;
     }
 
-    public Long saveVisitor(SaveVisitorDTO saveVisitorDTO) {
-        return visitorDao.saveVisitor(saveVisitorDTO);
+    public void saveVisitor(Visitor visitor) {
+        visitorDao.saveVisitor(visitor);
     }
 
     public Visitor getVisitorById(Long id){

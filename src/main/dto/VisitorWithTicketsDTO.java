@@ -2,12 +2,10 @@ package main.dto;
 
 import lombok.Data;
 import main.model.Ticket;
-
 import java.util.List;
 
 @Data
 public class VisitorWithTicketsDTO {
-
     private Long id;
     private String firstName;
     private String lastName;

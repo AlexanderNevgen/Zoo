@@ -1,11 +1,9 @@
 package main.dto;
 
 import lombok.Data;
-import java.util.Date;
 
 @Data
-public class TicketDTO {
-    private Date dateOfVisit;
+public class VisitorsFullNameDTO {
     private String firstName;
     private String lastName;
 }

@@ -1,8 +1,6 @@
 package main.repository;
 
-import main.dto.SaveVisitorDTO;
 import main.model.Visitor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.*;
 import java.util.List;
@@ -10,30 +8,13 @@ import java.util.List;
 @Repository
 public class VisitorDao {
 
-    private final TicketDao ticketDao;
+    @PersistenceUnit
+    static EntityManager em;
 
-    @Autowired
-    public VisitorDao(TicketDao ticketDao){
-        this.ticketDao = ticketDao;
-    }
-
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("visitors");
-
-    EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
-    EntityManager em = getEntityManager();
-
-    public Long saveVisitor(SaveVisitorDTO saveVisitorDto){
-
+    public void saveVisitor(Visitor visitor){
         em.getTransaction().begin();
-        em.persist(saveVisitorDto.getVisitor());
-        for(int i=0; i<saveVisitorDto.getVisitor().getTicketCount(); i++){
-            ticketDao.saveTicket(saveVisitorDto.getVisitor().getId(), saveVisitorDto.getDepartment());
-        }
+        em.persist(visitor);
         em.getTransaction().commit();
-        return saveVisitorDto.getVisitor().getId();
     }
 
     public Visitor getVisitorById(Long visitorId) {
@@ -63,14 +44,14 @@ public class VisitorDao {
         return em.createQuery("Select visitor from Visitor visitor").getResultList();
     }
 
-    public Long updateVisitor(Visitor visitor) {
-        em.detach(visitor);
-        visitor.setFirstName(visitor.getFirstName());
-        visitor.setLastName(visitor.getLastName());
-        visitor.setAge(visitor.getAge());
+    public void updateVisitor(Visitor visitor) {
+        Visitor uVisitor = em.find(Visitor.class, visitor.getId());
+        uVisitor.setFirstName(visitor.getFirstName());
+        uVisitor.setLastName(visitor.getLastName());
+        uVisitor.setAge(visitor.getAge());
         em.getTransaction().begin();
-        em.merge(visitor);
+        em.merge(uVisitor);
+        em.flush();
         em.getTransaction().commit();
-        return visitor.getId();
     }
 }

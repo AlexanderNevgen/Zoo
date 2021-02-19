@@ -1,36 +1,22 @@
 package main.repository;
 
 import main.dto.TicketDTO;
-import main.model.Department;
 import main.model.Ticket;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import java.util.Date;
+import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Repository
 public class TicketDao {
 
-   EntityManagerFactory emf = Persistence.createEntityManagerFactory("tickets");
+    @PersistenceUnit
+    static EntityManager em;
 
-    EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
-    EntityManager em = getEntityManager();
-
-    Long saveTicket(Long visitorId, Department department){
-        Date date = new Date();
-        Ticket ticket = new Ticket();
-        ticket.setDate(date);
-        ticket.setVisitorId(visitorId);
-        ticket.addDepartment(department);
+    public void saveTicket(Ticket ticket){
         em.getTransaction().begin();
         em.persist(ticket);
         em.getTransaction().commit();
-        return ticket.getTicketId();
     }
 
     public List<TicketDTO> findTicketByVisitorId(Long visitorId){
